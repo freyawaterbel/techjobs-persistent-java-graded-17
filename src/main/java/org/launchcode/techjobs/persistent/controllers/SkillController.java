@@ -20,7 +20,7 @@ public class SkillController {
     @Autowired
     SkillRepository skillRepository;
 
-    @GetMapping("")
+    @GetMapping("/")
     public String index(Model model) {
         Iterable<Skill> skills;
         skills = skillRepository.findAll();

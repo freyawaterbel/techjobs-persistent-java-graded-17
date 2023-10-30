@@ -19,7 +19,7 @@ public class EmployerController {
     @Autowired
     EmployerRepository employerRepository;
 
-    @GetMapping("")
+    @GetMapping("/")
     public String index(Model model) {
         Iterable<Employer> employers;
         employers = employerRepository.findAll();
