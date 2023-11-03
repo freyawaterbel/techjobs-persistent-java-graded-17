@@ -13,13 +13,11 @@ public class Job extends AbstractEntity {
 
 //    @NotNull(message = "Employer must be selected.")
     @ManyToOne
+//    @JoinColumn(name = "employer_id")
     private Employer employer;
 
     @ManyToMany
     private List<Skill> skills = new ArrayList<>();
-
-//    @NotNull
-//    private String skills;
 
     public Job() {
     }
