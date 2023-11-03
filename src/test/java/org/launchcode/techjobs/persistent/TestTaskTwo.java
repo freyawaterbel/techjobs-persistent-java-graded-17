@@ -458,45 +458,45 @@ public class TestTaskTwo extends AbstractTest {
 //    /*
 //     * Verifies that SkillController.index is properly defined
 //     * */
-//    @Test
-//    public void testSkillControllerIndexMethodDefinition (@Mocked SkillRepository skillRepository) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, NoSuchFieldException {
-//        Class skillControllerClass = getClassByName("controllers.SkillController");
-//        Method indexMethod = null;
-//
-//        // Verify that the index method exists
-//        try {
-//            indexMethod = skillControllerClass.getMethod("index", Model.class);
-//        } catch (NoSuchMethodException e) {
-//            fail("SkillController must have an index method that takes a parameter of type Model");
-//        }
-//
-//        Annotation annotation = indexMethod.getDeclaredAnnotation(RequestMapping.class);
-//
-//        // Verify that index has a routing annotation. We need to accommodate
-//        // both @RequestMapping and @GetMapping.
-//        if (annotation == null) {
-//            annotation = indexMethod.getDeclaredAnnotation(GetMapping.class);
-//        }
-//
-//        assertNotNull(annotation, "index method must have a routing annotation");
-//
-//        Method annotationValueMethod = annotation.getClass().getMethod("value");
-//        String[] values = ((String[]) annotationValueMethod.invoke(annotation));
-//        assertEquals(1, values.length, "The routing annotation for index must have a value");
-//        assertEquals("/", values[0], "The value parameter for the routing annotation must be the empty string");
-//
-//        // Verify that index calls skillRepository.findAll()
-//        new Expectations() {{
-//            skillRepository.findAll();
-//        }};
-//
-//        Model model = new ExtendedModelMap();
-//        SkillController skillController = new SkillController();
-//        Field skillRepositoryField = skillControllerClass.getDeclaredField("skillRepository");
-//        skillRepositoryField.setAccessible(true);
-//        skillRepositoryField.set(skillController, skillRepository);
-//        indexMethod.invoke(skillController, model);
-//    }
+    @Test
+    public void testSkillControllerIndexMethodDefinition (@Mocked SkillRepository skillRepository) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, NoSuchFieldException {
+        Class skillControllerClass = getClassByName("controllers.SkillController");
+        Method indexMethod = null;
+
+        // Verify that the index method exists
+        try {
+            indexMethod = skillControllerClass.getMethod("index", Model.class);
+        } catch (NoSuchMethodException e) {
+            fail("SkillController must have an index method that takes a parameter of type Model");
+        }
+
+        Annotation annotation = indexMethod.getDeclaredAnnotation(RequestMapping.class);
+
+        // Verify that index has a routing annotation. We need to accommodate
+        // both @RequestMapping and @GetMapping.
+        if (annotation == null) {
+            annotation = indexMethod.getDeclaredAnnotation(GetMapping.class);
+        }
+
+        assertNotNull(annotation, "index method must have a routing annotation");
+
+        Method annotationValueMethod = annotation.getClass().getMethod("value");
+        String[] values = ((String[]) annotationValueMethod.invoke(annotation));
+        assertEquals(1, values.length, "The routing annotation for index must have a value");
+        assertEquals("/", values[0], "The value parameter for the routing annotation must be the empty string");
+
+        // Verify that index calls skillRepository.findAll()
+        new Expectations() {{
+            skillRepository.findAll();
+        }};
+
+        Model model = new ExtendedModelMap();
+        SkillController skillController = new SkillController();
+        Field skillRepositoryField = skillControllerClass.getDeclaredField("skillRepository");
+        skillRepositoryField.setAccessible(true);
+        skillRepositoryField.set(skillController, skillRepository);
+        indexMethod.invoke(skillController, model);
+    }
 //
 //    /*
 //     * Verify that processAddSkillForm saves a new skill to the database
@@ -547,13 +547,13 @@ public class TestTaskTwo extends AbstractTest {
 //    /*
 //    * Tests SQL query for task 2
 //    * */
-//    @Test
-//    public void testSqlQuery() throws IOException {
-//        String queryFileContents = getFileContents("queries.sql");
-//
-//        Pattern queryPattern = Pattern.compile("SELECT\\s+name\\s+FROM\\s+employer\\s+WHERE\\s+location\\s+=\\s+\"St.\\s+Louis\\s+City\";", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-//        Matcher queryMatcher = queryPattern.matcher(queryFileContents);
-//        boolean queryFound = queryMatcher.find();
-//        assertTrue(queryFound, "Task 2 SQL query is incorrect. Test your query against your database to find the error.");
-//    }
+    @Test
+    public void testSqlQuery() throws IOException {
+        String queryFileContents = getFileContents("queries.sql");
+
+        Pattern queryPattern = Pattern.compile("SELECT\\s+name\\s+FROM\\s+employer\\s+WHERE\\s+location\\s+=\\s+\"St.\\s+Louis\\s+City\";", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+        Matcher queryMatcher = queryPattern.matcher(queryFileContents);
+        boolean queryFound = queryMatcher.find();
+        assertTrue(queryFound, "Task 2 SQL query is incorrect. Test your query against your database to find the error.");
+    }
 }

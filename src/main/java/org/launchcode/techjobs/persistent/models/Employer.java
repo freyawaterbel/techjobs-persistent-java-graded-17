@@ -17,12 +17,13 @@ public class Employer extends AbstractEntity {
     private String location;
 
     @OneToMany(mappedBy = "employer")
-//    @JoinColumn(name = "jobId")
+//    @JoinColumn(name = "employer_id")
     private List<Job> jobs = new ArrayList<>();
 
 
 //    Use the @OneToMany and @JoinColumn annotations on the jobs list in Employer to declare the relationship
 //    between data tables. Recall that this annotation needs a name parameter. What should its value be?
+    // --- editor's note: we never learned @JoinColumn, there is no "recall" to do
 
     public String getLocation() {
         return location;
